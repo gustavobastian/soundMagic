@@ -5,6 +5,7 @@
 #include <sound.hpp>
 #include <customButtons.hpp>
 #include <FL/Fl_File_Chooser.H>
+#include <memory>
 
 #include <FL/fl_ask.H>
 
@@ -23,10 +24,10 @@ namespace tb {
             static void chooserCb(Fl_File_Chooser *w,void *data);
 
             Fl_File_Chooser *chooser;
-            widgetsAudio::customButton *stopBt;
-            widgetsAudio::customButton *playBt;
-            widgetsAudio::customButton *exitBt;
-            widgetsAudio::customButton *selectBt;
+            std::unique_ptr<widgetsAudio::customButton> stopBt;
+            std::unique_ptr<widgetsAudio::customButton> playBt;
+            std::unique_ptr<widgetsAudio::customButton> exitBt;
+            std::unique_ptr<widgetsAudio::customButton> selectBt;
 
     };
 }

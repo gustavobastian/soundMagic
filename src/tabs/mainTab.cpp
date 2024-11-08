@@ -22,32 +22,26 @@ tb::MainTab::MainTab(int x,int y, int w, int h, const char *L):Fl_Group(x,y,w,h,
     chooser= new Fl_File_Chooser("./", "*.mp3", FL_SINGLE, "seleccionar");
     chooser->callback(this->chooserCb,this);
 
-    stopBt = new widgetsAudio::customButton(x+100,y+150,50,50,std::string("@||"));
+    stopBt = std::make_unique<widgetsAudio::customButton>(x+100,y+150,50,50,std::string("@||"));
     stopBt->callback(this->stopCb,nullptr);
-    playBt = new widgetsAudio::customButton(x+150,y+150,50,50,std::string("@>"));
+    playBt = std::make_unique<widgetsAudio::customButton>(x+150,y+150,50,50,std::string("@>"));
     playBt->callback(this->playCb,(this->mySound));
-    exitBt = new widgetsAudio::customButton(x+200,y+150,50,50,std::string("EXIT"));
+    exitBt =std::make_unique<widgetsAudio::customButton>(x+200,y+150,50,50,std::string("EXIT"));
     exitBt->callback(this->exitCb,nullptr);
     
-    selectBt = new widgetsAudio::customButton(x+350,y+50,50,50,std::string("@>"));
+    selectBt = std::make_unique<widgetsAudio::customButton>(x+350,y+50,50,50,std::string("@>"));
     selectBt->callback(this->selectCb,nullptr);
 
     stopBt->label("@||");
     playBt->label("@>");
     exitBt->label("Exit");
-    selectBt->label("Select");
-    add(playBt);
-    add(stopBt);
-    add(exitBt);   
-    add(selectBt);   
+    selectBt->label("Select");    
     end();
 };
 
 
 void tb::MainTab::chooserCb(Fl_File_Chooser *w,void *data){
-    tb::MainTab *localtab= static_cast<tb::MainTab*>(data);
-    
-    std::cout<<"seleccion:"<<w->value()<<"\n";
+    tb::MainTab *localtab= static_cast<tb::MainTab*>(data);    
     localtab->filename=w->value();
 }
 
