@@ -17,6 +17,7 @@ namespace snd{
         //audio format
         long rate;
         int channels, encoding;
+        std::string filename;
 
         //alsa playback
         snd_pcm_t *playback_handle;
@@ -26,6 +27,7 @@ namespace snd{
         public:
         SndObject(){};
         int playFile(std::string filename="../assets/x.mp3");
+        void setFilename(std::string filenameP){this->filename=filenameP;this->mp3_file = const_cast<char*>(this->filename.c_str());};
         static void run(unsigned char buffer[BUFFER_SIZE],size_t bytes_read, mpg123_handle *mh,snd_pcm_t *playback_handle, int channels);
     };
 

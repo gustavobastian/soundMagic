@@ -6,9 +6,11 @@
 #include <thread>
 
 
+
 int snd::SndObject::playFile(std::string filename){
-    std::cout<<"playing\n";
-    this->mp3_file = const_cast<char*>(filename.c_str());
+    std::cout<<"playing:"<<filename<<"\n";
+    this->filename=filename;
+    this->mp3_file = const_cast<char*>(this->filename.c_str());
     
     unsigned char buffer[BUFFER_SIZE];
     size_t bytes_read;
