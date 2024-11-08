@@ -25,7 +25,7 @@ int main(int, char**){
     mainApp->add(myTabs);    
     mainApp->end();
     mainApp->show();
-    std::cout << "Hello, from soundMagic!\n";
+    std::cout << "Hello, from soundMagic2!\n";
     Fl::run();
 }
 
