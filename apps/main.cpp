@@ -8,37 +8,21 @@
 
 #include <sound.hpp>
 #include <customButtons.hpp>
-
-
-void playCb(Fl_Widget *w, void *data){
-    snd::SndObject *localSound= static_cast<snd::SndObject*>(data);
-    localSound->playFile();    
-}
-
-void exitCb(Fl_Widget *w, void *data){
-    exit(0);
-}
-
-void stopCb(Fl_Widget *w, void *data){
-    std::cout<<"stoppig...\n";
-}
+#include <FL/Fl_File_Browser.H>
+#include <FL/fl_ask.H>
+#include <FL/Fl_Tabs.H>
+#include <aboutTab.hpp>
+#include <mainTab.hpp>
 
 int main(int, char**){
-    snd::SndObject mySound;
-    Fl_Window *mainApp = new Fl_Window(400,200,400,200,"soundMagic");
+    tb::MainTab *mainTab = new tb::MainTab(0,50,400,200,"Main");
+    tb::AboutTab *aboutTabs = new tb::AboutTab(0,50,400,200,"About");
+    Fl_Window *mainApp = new Fl_Window(400,200,400,300,"soundMagic");    
     
-    widgetsAudio::customButton *stopBt = new widgetsAudio::customButton(100,50,50,50,std::string("@||"));
-    stopBt->callback(stopCb,nullptr);
-    widgetsAudio::customButton *playBt = new widgetsAudio::customButton(150,50,50,50,std::string("@>"));
-    playBt->callback(playCb,&mySound);
-    widgetsAudio::customButton *exitBt = new widgetsAudio::customButton(150,150,50,50,std::string("EXIT"));
-    exitBt->callback(exitCb,nullptr);
-    
-    stopBt->label("@||");
-    playBt->label("@>");
-    mainApp->add(playBt);
-    mainApp->add(stopBt);
-    mainApp->add(exitBt);
+    Fl_Tabs *myTabs = new Fl_Tabs(0,0,400,300,"");
+    myTabs->add(mainTab);
+    myTabs->add(aboutTabs);    
+    mainApp->add(myTabs);    
     mainApp->end();
     mainApp->show();
     std::cout << "Hello, from soundMagic!\n";
