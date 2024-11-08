@@ -1,10 +1,13 @@
 #include <iostream>
+#include <string>
+#include <memory>
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Widget.H>
 
 #include <sound.hpp>
+#include <customButtons.hpp>
 
 
 void playCb(Fl_Widget *w, void *data){
@@ -20,12 +23,14 @@ int main(int, char**){
     snd::SndObject mySound;
     Fl_Window *mainApp = new Fl_Window(400,200,400,200,"soundMagic");
     
-    Fl_Button *stopBt = new Fl_Button(100,50,50,50,"@||");
-    Fl_Button *playBt = new Fl_Button(150,50,50,50,"@>");
+    widgetsAudio::customButton *stopBt = new widgetsAudio::customButton(100,50,50,50,std::string("@||"));
+    widgetsAudio::customButton *playBt = new widgetsAudio::customButton(150,50,50,50,std::string("@>"));
     playBt->callback(playCb,&mySound);
-    Fl_Button *exitBt = new Fl_Button(150,150,50,50,"EXIT");
+    widgetsAudio::customButton *exitBt = new widgetsAudio::customButton(150,150,50,50,std::string("EXIT"));
     exitBt->callback(exitCb,nullptr);
-
+    
+    stopBt->label("@||");
+    playBt->label("@>");
     mainApp->add(playBt);
     mainApp->add(stopBt);
     mainApp->add(exitBt);
