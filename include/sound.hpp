@@ -4,6 +4,7 @@
 
 #include <alsa/asoundlib.h>
 #include <mpg123.h>
+#include <string>
 
 #define PCM_DEVICE "default"
 #define BUFFER_SIZE 4096
@@ -24,7 +25,8 @@ namespace snd{
 
         public:
         SndObject(){};
-        int playFile();
+        int playFile(std::string filename="../assets/x.mp3");
+        static void run(unsigned char buffer[BUFFER_SIZE],size_t bytes_read, mpg123_handle *mh,snd_pcm_t *playback_handle, int channels);
     };
 
 
